@@ -65,7 +65,7 @@ export default function CheckoutPage() {
       <form action={checkoutAction} className="max-w-md mx-auto">
         <input type="hidden" name="items" value={JSON.stringify(items)} />
         <Button type="submit" variant="default" className="w-full">
-          Proceed to Payment ff
+          Proceed to Payment
         </Button>
       </form>
     </div>
