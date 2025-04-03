@@ -20,7 +20,7 @@ export const checkoutAction = async (formData: FormData): Promise<void> => {
     payment_method_types: ["card"],
     line_items,
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`, //you can add success also
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`, //you can add success also
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`,
   });
 
