@@ -16,29 +16,13 @@ export const checkoutAction = async (formData: FormData): Promise<void> => {
     quantity: item.quantity,
   }));
 
-  const successUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/success`;
-  const cancelUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`;
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items,
+    mode: "payment",
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`, //you can add success also
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout`,
+  });
 
-  console.log("Base URL:", process.env.NEXT_PUBLIC_BASE_URL);
-  console.log("Success URL:", successUrl);
-  console.log("Cancel URL:", cancelUrl);
-
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items,
-      mode: "payment",
-      success_url: successUrl,
-      cancel_url: cancelUrl,
-    });
-
-    if (!session.url) {
-      throw new Error("Failed to create checkout session, no URL returned.");
-    }
-
-    redirect(session.url);
-  } catch (error) {
-    console.error("Error creating Stripe checkout session:", error);
-    // Handle error appropriately, e.g., redirect to an error page or show a message
-  }
+  redirect(session.url!);
 };
