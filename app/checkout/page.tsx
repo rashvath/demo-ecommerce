@@ -1,20 +1,21 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCartStore } from "@/store/cart-store";
 import { checkoutAction } from "./checkout-action";
 
 export default function CheckoutPage() {
-  const { items, removeItem, addItem, clearCart } = useCartStore();
+  const { items, removeItem, addItem } = useCartStore();
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
-  if (total === 0 || items.length === 0) {
+  if (items.length === 0) {
     return (
-      <div>
-        <h1>Your cart is Empty</h1>
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
       </div>
     );
   }
@@ -33,25 +34,25 @@ export default function CheckoutPage() {
                 <div className="flex justify-between">
                   <span className="font-medium">{item.name}</span>
                   <span className="font-semibold">
-                    ${((item.price * item.quantity) / 100).toFixed(2)}{" "}
+                    ${((item.price * item.quantity) / 100).toFixed(2)}
                   </span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => removeItem(item.id)}
-                    >
-                      –
-                    </Button>
-                    <span className="text-lg font-semibold">
-                      {item.quantity}
-                    </span>
-                    <Button onClick={() => addItem({ ...item, quantity: 1 })}>
-                      +
-                    </Button>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    –
+                  </Button>
+                  <span className="text-lg font-semibold">{item.quantity}</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => addItem({ ...item, quantity: 1 })}
+                  >
+                    +
+                  </Button>
                 </div>
               </li>
             ))}
@@ -65,14 +66,6 @@ export default function CheckoutPage() {
         <input type="hidden" name="items" value={JSON.stringify(items)} />
         <Button type="submit" variant="default" className="w-full">
           Proceed to Payment
-        </Button>
-        <Button
-          onClick={clearCart}
-          type="submit"
-          variant="default"
-          className="w-full"
-        >
-          Clear cart
         </Button>
       </form>
     </div>
