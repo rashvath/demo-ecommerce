@@ -15,16 +15,16 @@ export const Navbar = () => {
   const { items } = useCartStore();
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setmobileOpen(false);
-      }
-      window.addEventListener("resize", handleResize);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth >= 768) {
+  //       setmobileOpen(false);
+  //     }
+  //     window.addEventListener("resize", handleResize);
 
-      return window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //     return window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   return (
     <nav className="sticky top-0 z-40 bg-white shadow">
