@@ -2,7 +2,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server:<img width="960" alt="image" src="https://github.com/user-attachments/assets/4e1e32fe-1073-4f3f-ad26-84866cfcbd2b" />
+
 
 ```bash
 npm run dev
